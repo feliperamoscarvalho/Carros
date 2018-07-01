@@ -8,10 +8,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import br.com.livroandroid.carros.R;
-import livroandroid.lib.utils.IntentUtils;
+import br.com.livroandroid.carros.fragments.CarrosFragment;
+import br.com.livroandroid.carros.fragments.SiteLivroFragment;
+
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v4.app.Fragment;
 
 
 
@@ -74,18 +77,23 @@ public class BaseActivity extends livroandroid.lib.activity.BaseActivity {
         switch (menuItem.getItemId()){
             case R.id.nav_item_carros_todos:
                 toast("Clicou em carros");
+                replaceFragment(CarrosFragment.newInstance(R.string.carros));
                 break;
             case R.id.nav_item_carros_classicos:
                 toast("Clicou em carros classicos");
+                replaceFragment(CarrosFragment.newInstance(R.string.classicos));
                 break;
             case R.id.nav_item_carros_esportivos:
                 toast("Clicou em carros esportivos");
+                replaceFragment(CarrosFragment.newInstance(R.string.esportivos));
                 break;
             case R.id.nav_item_carros_luxo:
                 toast("Clicou em carros luxo");
+                replaceFragment(CarrosFragment.newInstance(R.string.luxo));
                 break;
             case R.id.nav_item_site_livro:
                 toast("Clicou em site do livro");
+                replaceFragment(new SiteLivroFragment());
                 break;
             case R.id.nav_item_settings:
                 toast("Clicou em configuracoes");
@@ -120,5 +128,10 @@ public class BaseActivity extends livroandroid.lib.activity.BaseActivity {
         if(drawerLayout != null){
             drawerLayout.closeDrawer(GravityCompat.START);
         }
+    }
+
+    //Adiciona o fragment ao centro da tela
+    protected void replaceFragment(Fragment frag){
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, frag, "TAG").commit();
     }
 }
