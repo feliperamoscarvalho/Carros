@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.fragments.CarrosFragment;
+import br.com.livroandroid.carros.fragments.CarrosTabFragment;
 import br.com.livroandroid.carros.fragments.SiteLivroFragment;
 
 import android.view.View;
@@ -76,8 +77,8 @@ public class BaseActivity extends livroandroid.lib.activity.BaseActivity {
     private void onNavDrawerItemSelected(MenuItem menuItem){
         switch (menuItem.getItemId()){
             case R.id.nav_item_carros_todos:
-                toast("Clicou em carros");
-                replaceFragment(CarrosFragment.newInstance(R.string.carros));
+                //Mostrar as tres tabs (classicos, esportivos e luxo)
+                replaceFragment(new CarrosTabFragment());
                 break;
             case R.id.nav_item_carros_classicos:
                 toast("Clicou em carros classicos");
