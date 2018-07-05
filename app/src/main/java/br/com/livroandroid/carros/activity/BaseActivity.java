@@ -1,5 +1,6 @@
 package br.com.livroandroid.carros.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -77,24 +78,25 @@ public class BaseActivity extends livroandroid.lib.activity.BaseActivity {
     private void onNavDrawerItemSelected(MenuItem menuItem){
         switch (menuItem.getItemId()){
             case R.id.nav_item_carros_todos:
-                //Mostrar as tres tabs (classicos, esportivos e luxo)
-                replaceFragment(new CarrosTabFragment());
+                //Nada aqui, pois somente a MainActivity tem menu lateral
                 break;
             case R.id.nav_item_carros_classicos:
-                toast("Clicou em carros classicos");
-                replaceFragment(CarrosFragment.newInstance(R.string.classicos));
+                Intent intent = new Intent(getContext(), CarrosActivity.class);
+                intent.putExtra("tipo", R.string.classicos);
+                startActivity(intent);
                 break;
             case R.id.nav_item_carros_esportivos:
-                toast("Clicou em carros esportivos");
-                replaceFragment(CarrosFragment.newInstance(R.string.esportivos));
+                intent = new Intent(getContext(), CarrosActivity.class);
+                intent.putExtra("tipo", R.string.esportivos);
+                startActivity(intent);
                 break;
             case R.id.nav_item_carros_luxo:
-                toast("Clicou em carros luxo");
-                replaceFragment(CarrosFragment.newInstance(R.string.luxo));
+                intent = new Intent(getContext(), CarrosActivity.class);
+                intent.putExtra("tipo", R.string.luxo);
+                startActivity(intent);
                 break;
             case R.id.nav_item_site_livro:
-                toast("Clicou em site do livro");
-                replaceFragment(new SiteLivroFragment());
+                startActivity(new Intent(getContext(),SiteLivroActivity.class));
                 break;
             case R.id.nav_item_settings:
                 toast("Clicou em configuracoes");
@@ -132,7 +134,7 @@ public class BaseActivity extends livroandroid.lib.activity.BaseActivity {
     }
 
     //Adiciona o fragment ao centro da tela
-    protected void replaceFragment(Fragment frag){
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, frag, "TAG").commit();
-    }
+    //protected void replaceFragment(Fragment frag){
+        //getSupportFragmentManager().beginTransaction().replace(R.id.container, frag, "TAG").commit();
+    //}
 }

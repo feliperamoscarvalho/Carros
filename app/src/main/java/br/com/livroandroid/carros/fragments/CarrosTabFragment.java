@@ -29,17 +29,6 @@ public class CarrosTabFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_carros_tab, container, false);
-        //ViewPager
-        ViewPager viewPager = view.findViewById(R.id.viewPager);
-        viewPager.setOffscreenPageLimit(2);
-        viewPager.setAdapter(new TabsAdapter(getContext(), getChildFragmentManager()));
-        //Tabs
-        TabLayout tabLayout = view.findViewById(R.id.tabLayout);
-        //Cria as tabs com o mesmo adapter utilizado pelo ViewPager
-        tabLayout.setupWithViewPager(viewPager);
-        int cor = ContextCompat.getColor(getContext(), R.color.white);
-        //Cor branca no texto (o fundo azul foi deinifido no layout)
-        tabLayout.setTabTextColors(cor, cor);
         return  view;
     }
 
