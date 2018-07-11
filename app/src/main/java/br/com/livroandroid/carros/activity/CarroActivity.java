@@ -3,6 +3,9 @@ package br.com.livroandroid.carros.activity;
 import android.os.Parcel;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import br.com.livroandroid.carros.R;
 import br.com.livroandroid.carros.domain.Carro;
@@ -21,6 +24,12 @@ public class CarroActivity extends BaseActivity {
         Carro c = getIntent().getParcelableExtra("carro");
         getSupportActionBar().setTitle(c.nome);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        //Imagem de header na action bar
+        ImageView appBarImg = findViewById(R.id.appBarImg);
+        Picasso.with(getContext()).load(c.urlFoto).into(appBarImg);
+
+        //Adiciona o fragment ao layout
         if(savedInstanceState == null){
             //Cria o fragment com o mesmo Bundle (args) da intent
             CarroFragment frag = new CarroFragment();

@@ -9,12 +9,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
 import br.com.livroandroid.carros.R;
@@ -73,9 +75,14 @@ public class CarrosFragment extends BaseFragment {
 
     private void taskCarros(){
         //Busca os carros pelo tipo
-        this.carros = CarroService.getCarros(getContext(), tipo);
-        //Atualiza a lista
-        recyclerView.setAdapter(new CarroAdapter(getContext(), carros, onClickCarro()));
+        try{
+            this.carros = CarroService.getCarros(getContext(), tipo);
+            //Atualiza a lista
+            recyclerView.setAdapter(new CarroAdapter(getContext(), carros, onClickCarro()));
+        }catch (IOException e){
+            Log.e("livro", e.getMessage(), e);
+        }
+
     }
 
     private CarroAdapter.CarroOnClickListener onClickCarro(){
