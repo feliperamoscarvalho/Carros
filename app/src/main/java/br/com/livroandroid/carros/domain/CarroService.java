@@ -14,11 +14,13 @@ import java.util.List;
 
 import br.com.livroandroid.carros.R;
 import livroandroid.lib.utils.FileUtils;
+import livroandroid.lib.utils.HttpHelper;
 
 public class CarroService {
 
     private static final boolean LOG_ON = false;
     private static final String TAG = "CarroService";
+    private static final String URL = "http://www.livroandroid.com.br/livro/carros/v2/carros_{tipo}.json";
 
     public static List<Carro> getCarros(Context context, int tipo) throws IOException{
         /* Busca Fixa
@@ -34,7 +36,15 @@ public class CarroService {
         return carros;
         */
 
-        String json = readFile(context, tipo);
+        String tipoString = getTipo(tipo);
+        String url = URL.replace("{tipo}", tipoString);
+
+        //Lendo JSON fixo no app
+        //String json = readFile(context, tipo);
+        
+        //Faz a requisicao HTTP no servidor e retorna a string com o conteudo
+        HttpHelper http = new HttpHelper();
+        String json = http.doGet(url);
         List<Carro> carros = parserJSON(context, json);
         return carros;
     }
@@ -55,5 +65,15 @@ public class CarroService {
         //Faz o parser em apenas uma linha e cria a lista
         List<Carro> carros = new Gson().fromJson(json, listType);
         return carros;
+    }
+
+    //Converte a constante para string para criar a URL do web service
+    private static String getTipo(int tipo){
+        if(tipo == R.string.classicos){
+            return "classicos";
+        }else if(tipo == R.string.esportivos){
+            return "esportivos";
+        }
+        return "luxo";
     }
 }

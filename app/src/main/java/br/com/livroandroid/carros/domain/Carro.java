@@ -10,9 +10,9 @@ public class Carro implements Parcelable{
     public String tipo;
     public String nome;
     public String desc;
-    public String urlFoto;
-    public String urlInfo;
-    public String urlVideo;
+    public String url_foto;
+    public String url_info;
+    public String url_video;
     public String latitude;
     public String longitude;
 
@@ -50,9 +50,9 @@ public class Carro implements Parcelable{
         dest.writeString(this.tipo);
         dest.writeString(this.nome);
         dest.writeString(this.desc);
-        dest.writeString(this.urlFoto);
-        dest.writeString(this.urlInfo);
-        dest.writeString(this.urlVideo);
+        dest.writeString(this.url_foto);
+        dest.writeString(this.url_info);
+        dest.writeString(this.url_video);
         dest.writeString(this.latitude);
         dest.writeString(this.longitude);
     }
@@ -63,9 +63,9 @@ public class Carro implements Parcelable{
         this.tipo = parcel.readString();
         this.nome = parcel.readString();
         this.desc = parcel.readString();
-        this.urlFoto = parcel.readString();
-        this.urlInfo = parcel.readString();
-        this.urlVideo = parcel.readString();
+        this.url_foto = parcel.readString();
+        this.url_info = parcel.readString();
+        this.url_video = parcel.readString();
         this.latitude = parcel.readString();
         this.longitude = parcel.readString();
     }

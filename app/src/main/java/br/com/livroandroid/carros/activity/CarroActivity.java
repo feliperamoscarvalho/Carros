@@ -27,7 +27,7 @@ public class CarroActivity extends BaseActivity {
 
         //Imagem de header na action bar
         ImageView appBarImg = findViewById(R.id.appBarImg);
-        Picasso.with(getContext()).load(c.urlFoto).into(appBarImg);
+        Picasso.with(getContext()).load(c.url_foto).into(appBarImg);
 
         //Adiciona o fragment ao layout
         if(savedInstanceState == null){

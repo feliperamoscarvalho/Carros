@@ -39,6 +39,6 @@ public class CarroFragment extends BaseFragment {
         //Atualiza a view do fragment com os dados do carro
         setTextString(R.id.tDesc, carro.desc);
         final ImageView imgView = getView().findViewById(R.id.img);
-        Picasso.with(getContext()).load(carro.urlFoto).fit().into(imgView);
+        Picasso.with(getContext()).load(carro.url_foto).fit().into(imgView);
     }
 }

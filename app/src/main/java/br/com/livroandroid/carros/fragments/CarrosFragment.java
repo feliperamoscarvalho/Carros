@@ -3,6 +3,7 @@ package br.com.livroandroid.carros.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -74,15 +75,8 @@ public class CarrosFragment extends BaseFragment {
     }
 
     private void taskCarros(){
-        //Busca os carros pelo tipo
-        try{
-            this.carros = CarroService.getCarros(getContext(), tipo);
-            //Atualiza a lista
-            recyclerView.setAdapter(new CarroAdapter(getContext(), carros, onClickCarro()));
-        }catch (IOException e){
-            Log.e("livro", e.getMessage(), e);
-        }
-
+        //Busca os carros: dispara a Task
+        new GetCarrosTask().execute();
     }
 
     private CarroAdapter.CarroOnClickListener onClickCarro(){
@@ -95,5 +89,29 @@ public class CarrosFragment extends BaseFragment {
                 startActivity(intent);
             }
         };
+    }
+
+    //Task para buscar os carros
+    private class GetCarrosTask extends AsyncTask<Void,Void,List<Carro>>{
+
+        @Override
+        protected List<Carro> doInBackground(Void... voids) {
+            try{
+                //Busca os carros em background (Thread)
+                return CarroService.getCarros(getContext(), tipo);
+            }catch (IOException e){
+                Log.e("livroandroid", e.getMessage(), e);
+                return null;
+            }
+        }
+
+        //Atualiza a interface
+        protected void onPostExecute(List<Carro> carros){
+            if(carros != null){
+                CarrosFragment.this.carros = carros;
+                //Atualiza a view na UI Thread
+                recyclerView.setAdapter(new CarroAdapter(getContext(), carros, onClickCarro()));
+            }
+        }
     }
 }
